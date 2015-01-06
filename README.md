@@ -1,4 +1,4 @@
 model-saxon
 ===========
 
-Implementation of the model for Saxon
+Implementation of the model for Saxon.
