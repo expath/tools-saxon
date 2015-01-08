@@ -7,7 +7,7 @@
 /* ------------------------------------------------------------------------ */
 
 
-package org.expath.tools.saxon;
+package org.expath.tools.saxon.model;
 
 import java.io.OutputStream;
 import java.util.Properties;

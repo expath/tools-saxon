@@ -7,7 +7,7 @@
 /* ------------------------------------------------------------------------ */
 
 
-package org.expath.tools.saxon;
+package org.expath.tools.saxon.model;
 
 import net.sf.saxon.om.NodeInfo;
 import net.sf.saxon.trans.XPathException;

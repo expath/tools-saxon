@@ -7,7 +7,7 @@
 /* ------------------------------------------------------------------------ */
 
 
-package org.expath.tools.saxon;
+package org.expath.tools.saxon.model;
 
 import java.util.Arrays;
 import java.util.Iterator;

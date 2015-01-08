@@ -7,7 +7,7 @@
 /* ------------------------------------------------------------------------ */
 
 
-package org.expath.tools.saxon;
+package org.expath.tools.saxon.model;
 
 import net.sf.saxon.event.Builder;
 import net.sf.saxon.expr.XPathContext;
