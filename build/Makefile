@@ -1,17 +1,17 @@
 ver  := 0.1.0dev
-mod  := expath-model-saxon
+mod  := expath-tools-saxon
 root := $(mod)-$(ver)
-prj  := ../model-saxon
-jar  := $(prj)/dist/model-saxon.jar
+prj  := ../tools-saxon
+jar  := $(prj)/dist/tools-saxon.jar
 
-prop=$(prj)/src/org/expath/model/saxon/version.properties
+prop=$(prj)/src/org/expath/tools/saxon/version.properties
 rev=$(shell git describe --always)
 
 all: clean dist
 
 dist:
-	echo "org.expath.model.saxon.version=$(ver)"  >  $(prop)
-	echo "org.expath.model.saxon.revision=$(rev)" >> $(prop)
+	echo "org.expath.tools.saxon.version=$(ver)"  >  $(prop)
+	echo "org.expath.tools.saxon.revision=$(rev)" >> $(prop)
 	( cd "$(prj)" && ant )
 	mkdir "$(root)"
 	echo "Version: $(ver)" > "$(root)/VERSION"
@@ -31,6 +31,6 @@ clean:
 	rm -f  "$(root).zip"
 
 check-version:
-	java -cp "$(mod).jar" org.expath.model.saxon.Version
+	java -cp "$(mod).jar" org.expath.tools.saxon.Version
 
 .PHONY: dist clean

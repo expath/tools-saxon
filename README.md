@@ -1,4 +1,4 @@
-model-saxon
+tools-saxon
 ===========
 
-Implementation of the model for Saxon.
+Implementation of the tools for Saxon.

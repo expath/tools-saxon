@@ -7,7 +7,7 @@
 /* ------------------------------------------------------------------------ */
 
 
-package org.expath.model.saxon;
+package org.expath.tools.saxon;
 
 import java.io.OutputStream;
 import java.util.Properties;
@@ -18,8 +18,8 @@ import net.sf.saxon.om.SequenceIterator;
 import net.sf.saxon.query.QueryResult;
 import net.sf.saxon.trans.XPathException;
 import net.sf.saxon.tree.iter.SingletonIterator;
-import org.expath.model.ModelException;
-import org.expath.model.Sequence;
+import org.expath.tools.ToolsException;
+import org.expath.tools.Sequence;
 
 /**
  * Saxon implementation of {@link Sequence}, relying on {@link SequenceIterator}.
@@ -38,26 +38,26 @@ public class SaxonSequence
 
     @Override
     public boolean isEmpty()
-            throws ModelException
+            throws ToolsException
     {
         try {
             return myIt == null || myIt.getAnother().next() == null;
         }
         catch ( XPathException ex ) {
-            throw new ModelException("Error getting another iterator", ex);
+            throw new ToolsException("Error getting another iterator", ex);
         }
     }
 
     @Override
     public Sequence next()
-            throws ModelException
+            throws ToolsException
     {
         Item item;
         try {
             item = myIt == null ? null : myIt.next();
         }
         catch ( XPathException ex ) {
-            throw new ModelException("Error getting the next item in the sequence", ex);
+            throw new ToolsException("Error getting the next item in the sequence", ex);
         }
         SequenceIterator it = SingletonIterator.makeIterator(item);
         return new SaxonSequence(it, myCtxt);
@@ -65,7 +65,7 @@ public class SaxonSequence
 
     @Override
     public void serialize(OutputStream out, Properties params)
-            throws ModelException
+            throws ToolsException
     {
         // TODO: childs can be childs of http:body.  Even if the 'http' prefix is
         // in @exclude-result-prefixes, its namespace declaration is serialized
@@ -78,7 +78,7 @@ public class SaxonSequence
             QueryResult.serializeSequence(myIt, config, out, params);
         }
         catch ( XPathException ex ) {
-            throw new ModelException("Error serializing the single part body", ex);
+            throw new ToolsException("Error serializing the single part body", ex);
         }
     }
 

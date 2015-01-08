@@ -7,7 +7,7 @@
 /* ------------------------------------------------------------------------ */
 
 
-package org.expath.model.saxon;
+package org.expath.tools.saxon;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -22,10 +22,10 @@ import net.sf.saxon.pattern.NodeKindTest;
 import net.sf.saxon.pattern.NodeTest;
 import net.sf.saxon.tree.iter.AxisIterator;
 import net.sf.saxon.type.Type;
-import org.expath.model.Attribute;
-import org.expath.model.Element;
-import org.expath.model.ModelException;
-import org.expath.model.Sequence;
+import org.expath.tools.Attribute;
+import org.expath.tools.Element;
+import org.expath.tools.ToolsException;
+import org.expath.tools.Sequence;
 
 /**
  * Saxon implementation of {@link Element}, relying on {@link NodeInfo}.
@@ -37,13 +37,13 @@ public class SaxonElement
         implements Element
 {
     public SaxonElement(NodeInfo node, XPathContext ctxt)
-            throws ModelException
+            throws ToolsException
     {
         if ( node == null ) {
-            throw new ModelException("the node is null");
+            throw new ToolsException("the node is null");
         }
         if ( node.getNodeKind() != Type.ELEMENT ) {
-            throw new ModelException("the node is not an element");
+            throw new ToolsException("the node is not an element");
         }
         myNode = node;
         myCtxt = ctxt;
@@ -102,7 +102,7 @@ public class SaxonElement
 
     @Override
     public void noOtherNCNameAttribute(String[] names, String[] forbidden_ns)
-            throws ModelException
+            throws ToolsException
     {
         if ( names == null ) {
             throw new NullPointerException("the names array is null");
@@ -119,13 +119,13 @@ public class SaxonElement
             String attr_name = attr.getDisplayName();
             String ns = attr.getURI();
             if ( Arrays.binarySearch(sorted_ns, ns) >= 0 ) {
-                throw new ModelException("@" + attr_name + " in namespace " + ns + " not allowed on " + elem_name);
+                throw new ToolsException("@" + attr_name + " in namespace " + ns + " not allowed on " + elem_name);
             }
             else if ( ! "".equals(ns) ) {
                 // ignore other-namespace-attributes
             }
             else if ( Arrays.binarySearch(sorted_names, attr.getLocalPart()) < 0 ) {
-                throw new ModelException("@" + attr_name + " not allowed on " + elem_name);
+                throw new ToolsException("@" + attr_name + " not allowed on " + elem_name);
             }
         }
     }
@@ -263,7 +263,7 @@ public class SaxonElement
             try {
                 e = new SaxonElement(myNext, myCtxt);
             }
-            catch ( ModelException ex ) {
+            catch ( ToolsException ex ) {
                 // because we're implementing the Iterator interface, we don't
                 // have the choice but to throw a runtime exception, but we know
                 // by construction this is not possible to arrive here (we've

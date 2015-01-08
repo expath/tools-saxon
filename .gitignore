@@ -1,7 +1,7 @@
-/build/expath-model-saxon-0.*.zip
-/build/expath-model-saxon.jar
-/model-saxon/nbproject/private/
-/model-saxon/nbproject/genfiles.properties
-/model-saxon/build/
-/model-saxon/dist/
-/model-saxon/src/org/expath/model/saxon/version.properties
+/build/expath-tools-saxon-0.*.zip
+/build/expath-tools-saxon.jar
+/tools-saxon/nbproject/private/
+/tools-saxon/nbproject/genfiles.properties
+/tools-saxon/build/
+/tools-saxon/dist/
+/tools-saxon/src/org/expath/tools/saxon/version.properties

@@ -7,7 +7,7 @@
 /* ------------------------------------------------------------------------ */
 
 
-package org.expath.model.saxon;
+package org.expath.tools.saxon;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,8 +38,8 @@ public class Version
             throw new IllegalStateException("Error reading the version properties: " + VER_PROP, ex);
         }
         // get both properties
-        myVersion  = props.getProperty("org.expath.model.saxon.version");
-        myRevision = props.getProperty("org.expath.model.saxon.revision");
+        myVersion  = props.getProperty("org.expath.tools.saxon.version");
+        myRevision = props.getProperty("org.expath.tools.saxon.revision");
     }
 
     public static void main(String[] args)
@@ -49,7 +49,7 @@ public class Version
 
     public void display(PrintStream out)
     {
-        out.println("EXPath Model for Saxon.");
+        out.println("EXPath Tools for Saxon.");
         out.println("Version: " + getVersion() + " (revision #" + getRevision() + ")");
     }
 
@@ -71,7 +71,7 @@ public class Version
         return myRevision;
     }
 
-    private static final String  VER_PROP = "/org/expath/model/saxon/version.properties";
+    private static final String  VER_PROP = "/org/expath/tools/saxon/version.properties";
     private static Version INSTANCE = null;
     private String myVersion;
     private String myRevision;

@@ -7,7 +7,7 @@
 /* ------------------------------------------------------------------------ */
 
 
-package org.expath.model.saxon;
+package org.expath.tools.saxon;
 
 import net.sf.saxon.om.NodeInfo;
 import net.sf.saxon.trans.XPathException;
@@ -15,8 +15,8 @@ import net.sf.saxon.value.AtomicValue;
 import net.sf.saxon.value.BooleanValue;
 import net.sf.saxon.value.IntegerValue;
 import net.sf.saxon.value.NumericValue;
-import org.expath.model.Attribute;
-import org.expath.model.ModelException;
+import org.expath.tools.Attribute;
+import org.expath.tools.ToolsException;
 
 /**
  * Implementation of {@link Attribute} for Saxon.
@@ -52,7 +52,7 @@ public class SaxonAttribute
 
     @Override
     public boolean getBoolean()
-            throws ModelException
+            throws ToolsException
     {
         String str = myNode.getStringValue();
         AtomicValue val;
@@ -60,10 +60,10 @@ public class SaxonAttribute
             val = BooleanValue.fromString(str).asAtomic();
         }
         catch ( XPathException ex ) {
-            throw new ModelException("Error parse the attribute value as boolean", ex);
+            throw new ToolsException("Error parse the attribute value as boolean", ex);
         }
         if ( ! ( val instanceof BooleanValue ) ) {
-            throw new ModelException("@" + getLocalName() + " is not a boolean");
+            throw new ToolsException("@" + getLocalName() + " is not a boolean");
         }
         BooleanValue b = (BooleanValue) val;
         return b.getBooleanValue();
@@ -71,12 +71,12 @@ public class SaxonAttribute
 
     @Override
     public int getInteger()
-            throws ModelException
+            throws ToolsException
     {
         String str = myNode.getStringValue();
         NumericValue val = NumericValue.parseNumber(str);
         if ( NumericValue.isInteger(val) ) {
-            throw new ModelException("@" + getLocalName() + " is not an integer");
+            throw new ToolsException("@" + getLocalName() + " is not an integer");
         }
         IntegerValue i = (IntegerValue) val;
         return i.asBigInteger().intValue();
