@@ -11,9 +11,13 @@ package org.expath.tools.saxon.model;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import javax.xml.namespace.QName;
 import net.sf.saxon.expr.XPathContext;
+import net.sf.saxon.lib.ConversionRules;
 import net.sf.saxon.om.AxisInfo;
+import net.sf.saxon.om.InscopeNamespaceResolver;
 import net.sf.saxon.om.NamePool;
+import net.sf.saxon.om.NamespaceResolver;
 import net.sf.saxon.om.NodeInfo;
 import net.sf.saxon.om.SequenceIterator;
 import net.sf.saxon.pattern.NameTest;
@@ -21,11 +25,14 @@ import net.sf.saxon.pattern.NamespaceTest;
 import net.sf.saxon.pattern.NodeKindTest;
 import net.sf.saxon.pattern.NodeTest;
 import net.sf.saxon.tree.iter.AxisIterator;
+import net.sf.saxon.type.ConversionResult;
+import net.sf.saxon.type.StringConverter;
 import net.sf.saxon.type.Type;
-import org.expath.tools.Attribute;
-import org.expath.tools.Element;
+import net.sf.saxon.value.QNameValue;
 import org.expath.tools.ToolsException;
-import org.expath.tools.Sequence;
+import org.expath.tools.model.Attribute;
+import org.expath.tools.model.Element;
+import org.expath.tools.model.Sequence;
 
 /**
  * Saxon implementation of {@link Element}, relying on {@link NodeInfo}.
@@ -161,6 +168,25 @@ public class SaxonElement
         NodeTest pred = new NamespaceTest(pool, Type.ELEMENT, ns);
         AxisIterator it = myNode.iterateAxis(AxisInfo.CHILD, pred);
         return new ElemIterable(it);
+    }
+
+    @Override
+    public QName parseQName(String value)
+            throws ToolsException
+    {
+        // set up the converter
+        ConversionRules rules = myNode.getConfiguration().getConversionRules();
+        StringConverter converter = new StringConverter.StringToQName(rules);
+        converter.setNamespaceResolver(new InscopeNamespaceResolver(myNode));
+        // convert
+        ConversionResult result = converter.convertString(value);
+        // check result type
+        if ( ! (result instanceof QNameValue) ) {
+            throw new ToolsException("Error parsing literal QName: " + result);
+        }
+        QNameValue qname = (QNameValue) result;
+        // to generic QName
+        return qname.toJaxpQName();
     }
 
     private NodeInfo myNode;
