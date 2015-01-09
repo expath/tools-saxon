@@ -15,8 +15,8 @@ import net.sf.saxon.value.AtomicValue;
 import net.sf.saxon.value.BooleanValue;
 import net.sf.saxon.value.IntegerValue;
 import net.sf.saxon.value.NumericValue;
-import org.expath.tools.Attribute;
 import org.expath.tools.ToolsException;
+import org.expath.tools.model.Attribute;
 
 /**
  * Implementation of {@link Attribute} for Saxon.

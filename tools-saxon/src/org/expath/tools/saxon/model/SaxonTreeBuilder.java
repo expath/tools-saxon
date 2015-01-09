@@ -16,7 +16,7 @@ import net.sf.saxon.trans.XPathException;
 import net.sf.saxon.type.BuiltInAtomicType;
 import net.sf.saxon.type.Untyped;
 import org.expath.tools.ToolsException;
-import org.expath.tools.TreeBuilder;
+import org.expath.tools.model.TreeBuilder;
 
 
 /**
