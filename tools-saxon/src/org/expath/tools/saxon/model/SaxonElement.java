@@ -13,22 +13,20 @@ import java.util.Arrays;
 import java.util.Iterator;
 import javax.xml.namespace.QName;
 import net.sf.saxon.expr.XPathContext;
-import net.sf.saxon.lib.ConversionRules;
 import net.sf.saxon.om.AxisInfo;
 import net.sf.saxon.om.InscopeNamespaceResolver;
 import net.sf.saxon.om.NamePool;
 import net.sf.saxon.om.NamespaceResolver;
 import net.sf.saxon.om.NodeInfo;
 import net.sf.saxon.om.SequenceIterator;
+import net.sf.saxon.om.StructuredQName;
 import net.sf.saxon.pattern.NameTest;
 import net.sf.saxon.pattern.NamespaceTest;
 import net.sf.saxon.pattern.NodeKindTest;
 import net.sf.saxon.pattern.NodeTest;
+import net.sf.saxon.trans.XPathException;
 import net.sf.saxon.tree.iter.AxisIterator;
-import net.sf.saxon.type.ConversionResult;
-import net.sf.saxon.type.StringConverter;
 import net.sf.saxon.type.Type;
-import net.sf.saxon.value.QNameValue;
 import org.expath.tools.ToolsException;
 import org.expath.tools.model.Attribute;
 import org.expath.tools.model.Element;
@@ -174,19 +172,14 @@ public class SaxonElement
     public QName parseQName(String value)
             throws ToolsException
     {
-        // set up the converter
-        ConversionRules rules = myNode.getConfiguration().getConversionRules();
-        StringConverter converter = new StringConverter.StringToQName(rules);
-        converter.setNamespaceResolver(new InscopeNamespaceResolver(myNode));
-        // convert
-        ConversionResult result = converter.convertString(value);
-        // check result type
-        if ( ! (result instanceof QNameValue) ) {
-            throw new ToolsException("Error parsing literal QName: " + result);
+        try {
+            NamespaceResolver resolver = new InscopeNamespaceResolver(myNode);
+            StructuredQName name = StructuredQName.fromLexicalQName(value, true, false, resolver);
+            return name.toJaxpQName();
         }
-        QNameValue qname = (QNameValue) result;
-        // to generic QName
-        return qname.toJaxpQName();
+        catch ( XPathException ex ) {
+            throw new ToolsException("Error parsing the literal QName: " + value, ex);
+        }
     }
 
     private NodeInfo myNode;
