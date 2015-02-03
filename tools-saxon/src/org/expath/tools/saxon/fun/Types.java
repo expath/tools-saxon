@@ -191,7 +191,7 @@ public class Types
     }
 
     /**
-     * Create a QName in the web:* namespace.
+     * Create a QName in the namespace of the library of this object.
      */
     public StructuredQName qname(String local)
     {
@@ -201,7 +201,7 @@ public class Types
     }
 
     /**
-     * Create an "element(web:xxx)" type, in the web:* namespace.
+     * Create an "element(ns:xxx)" type, in the namespace of the library of this object.
      */
     public SequenceType singleElement(String local, Processor saxon)
     {
@@ -209,7 +209,7 @@ public class Types
     }
 
     /**
-     * Create an "element(web:xxx)?" type, in the web:* namespace.
+     * Create an "element(ns:xxx)?" type, in the namespace of the library of this object.
      */
     public SequenceType optionalElement(String local, Processor saxon)
     {
@@ -217,7 +217,7 @@ public class Types
     }
 
     /**
-     * Create an "element(web:xxx)*" type, in the web:* namespace.
+     * Create an "element(ns:xxx)*" type, in the namespace of the library of this object.
      */
     public SequenceType anyElement(String local, Processor saxon)
     {
@@ -225,7 +225,7 @@ public class Types
     }
 
     /**
-     * Create an "element(web:xxx)+" type, in the web:* namespace.
+     * Create an "element(ns:xxx)+" type, in the namespace of the library of this object.
      */
     public SequenceType severalElement(String local, Processor saxon)
     {
