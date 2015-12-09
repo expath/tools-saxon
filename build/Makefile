@@ -16,8 +16,8 @@ dist:
 	mkdir "$(root)"
 	echo "Version: $(ver)" > "$(root)/VERSION"
 	echo "Git revision:" `git describe --always` >> "$(root)/VERSION"
-	cp "$(jar)" "$(mod).jar"
-	cp "$(jar)" "$(root)/$(mod).jar"
+	cp "$(jar)" "$(root).jar"
+	cp "$(jar)" "$(root)/$(root).jar"
 	cp README "$(root)/README"
 	cp -pPR "$(prj)/src" "$(root)"
 	find "$(root)/src" -type d -name .~ \
@@ -26,11 +26,11 @@ dist:
 	rm -rf "$(root)"
 
 clean:
-	rm -f  "$(mod).jar"
+	rm -f  "$(root).jar"
 	rm -fr "$(root)"
 	rm -f  "$(root).zip"
 
 check-version:
-	java -cp "$(mod).jar" org.expath.tools.saxon.Version
+	java -cp "$(root).jar" org.expath.tools.saxon.Version
 
 .PHONY: dist clean
