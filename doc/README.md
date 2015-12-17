@@ -35,32 +35,34 @@ It provides the namespace URI and prefix in the constructor, and the
 set of fuctions by implementing the method `functions()`.  A typical
 example is:
 
-    import org.expath.tools.ToolsException;
-    import org.expath.tools.saxon.fun.Function;
-    import org.expath.tools.saxon.fun.Library;
+```java
+import org.expath.tools.ToolsException;
+import org.expath.tools.saxon.fun.Function;
+import org.expath.tools.saxon.fun.Library;
 
-    public class MyLib
-            extends Library
+public class MyLib
+        extends Library
+{
+    public MyLib()
     {
-        public MyLib()
-        {
-            super(URI, PREFIX);
-        }
-
-        @Override
-        protected Function[] functions()
-                throws ToolsException
-        {
-            return new Function[] {
-                new FunUno(this),
-                new FunDos(this),
-                new FunTres(this)
-            };
-        }
-
-        public static final String URI    = "http://example.org/ns/my";
-        public static final String PREFIX = "my";
+        super(URI, PREFIX);
     }
+
+    @Override
+    protected Function[] functions()
+            throws ToolsException
+    {
+        return new Function[] {
+            new FunUno(this),
+            new FunDos(this),
+            new FunTres(this)
+        };
+    }
+
+    public static final String URI    = "http://example.org/ns/my";
+    public static final String PREFIX = "my";
+}
+```
 
 In this example, `FunUno`, `FunDos` and `FunTres` are three functions.
 
@@ -83,34 +85,36 @@ It provides the library in the constructor, the definition by
 implementing `makeDefinition()`, and the implementation by
 implementing the method `call()`.  A typical example is:
 
-    import org.expath.tools.saxon.fun.Definition;
-    import org.expath.tools.saxon.fun.Function;
-    import org.expath.tools.saxon.fun.Library;
+```java
+import org.expath.tools.saxon.fun.Definition;
+import org.expath.tools.saxon.fun.Function;
+import org.expath.tools.saxon.fun.Library;
 
-    public class FunUno
-            extends Function
+public class FunUno
+        extends Function
+{
+    public FunUno(Library lib)
     {
-        public FunUno(Library lib)
-        {
-            super(lib);
-        }
-
-        @Override
-        protected Definition makeDefinition()
-                throws ToolsException
-        {
-            // return a definition, see below
-        }
-
-        @Override
-        public Sequence call(XPathContext ctxt, Sequence[] orig_params)
-                throws XPathException
-        {
-            // implement the behaviour, see below
-        }
-
-        private static final String NAME = "fun-uno";
+        super(lib);
     }
+
+    @Override
+    protected Definition makeDefinition()
+            throws ToolsException
+    {
+        // return a definition, see below
+    }
+
+    @Override
+    public Sequence call(XPathContext ctxt, Sequence[] orig_params)
+            throws XPathException
+    {
+        // implement the behaviour, see below
+    }
+
+    private static final String NAME = "fun-uno";
+}
+```
 
 ## Definition
 
@@ -139,18 +143,20 @@ more elements named *para*").
 A def builder is used to simplify the implementation of the method
 `makeDefinition()` in a function:
 
-    @Override
-    protected Definition makeDefinition()
-            throws ToolsException
-    {
-        return library()
-                .function(this, NAME)
-                .returns(Types.SINGLE_STRING)
-                .param(Types.SINGLE_STRING, "first")
-                .optional()
-                .param(Types.SINGLE_STRING, "last")
-                .make();
-    }
+```java
+@Override
+protected Definition makeDefinition()
+        throws ToolsException
+{
+    return library()
+            .function(this, NAME)
+            .returns(Types.SINGLE_STRING)
+            .param(Types.SINGLE_STRING, "first")
+            .optional()
+            .param(Types.SINGLE_STRING, "last")
+            .make();
+}
+```
 
 This example defines two functions, both with the same name.  They
 both returns exactly one `xs:string`.  One takes one parameter called
@@ -183,25 +189,27 @@ Typically, the beginning of `call()` will use `Parameters`, and the
 end will use `Return`.  The stuff in between is your business logic.
 The useful code you created an extension function for.
 
-    @Override
-    public Sequence call(XPathContext ctxt, Sequence[] originalParams)
-            throws XPathException
-    {
-        // the params
-        Parameters params = checkParams(originalParams);
-        String first = params.asString(0, false);
-        // the actual code
-        String result;
-        if ( params.number() = 1 ) {
-            result = "Hello, " + first + "!";
-        }
-        else {
-            String last = params.asString(1, true);
-            result = "Hello, " + first + " " + last + "!";
-        }
-        // return an xs:string
-        return Return.value(result);
+```java
+@Override
+public Sequence call(XPathContext ctxt, Sequence[] originalParams)
+        throws XPathException
+{
+    // the params
+    Parameters params = checkParams(originalParams);
+    String first = params.asString(0, false);
+    // the actual code
+    String result;
+    if ( params.number() = 1 ) {
+        result = "Hello, " + first + "!";
     }
+    else {
+        String last = params.asString(1, true);
+        result = "Hello, " + first + " " + last + "!";
+    }
+    // return an xs:string
+    return Return.value(result);
+}
+```
 
 The boiler plate code is kept to a minimum: extracting parameters
 values, and returning values.
