@@ -4,7 +4,11 @@ tools-saxon
 Implementation of the tools for Saxon.
 
 It is mainly two things now: the implementation of the data model from
-tools-java, and additional tools to ease writing extension functions for Saxon.
+tools-java, and additional tools to ease writing extension functions
+for Saxon.
+
+This README file contains an introduction to the tools provided here.
+For a more complete documentation, see [doc/](doc/).
 
 Function tools
 --------------
