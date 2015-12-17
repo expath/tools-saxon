@@ -14,6 +14,17 @@ The class `EXPathFileLibrary` in that directory is the library class.
 The 3 sub-directories contain together the classes of the 32 function
 in the library.
 
+The goal of an extension function is simply to implement an XPath
+function.  For instance, in XSLT, you could use the following
+function, provided that a function `hello`, in the same namespace,
+with 1 parameter, has been declared in Saxon:
+
+```xsl
+<xsl:sequence
+   xmlns:my="http://example.org/ns/my"
+   select="my:hello('world')"/>
+```
+
 ## Library
 
 The package introduces the concept of `Library`.  A library is a
@@ -53,9 +64,9 @@ public class MyLib
             throws ToolsException
     {
         return new Function[] {
-            new FunUno(this),
-            new FunDos(this),
-            new FunTres(this)
+            new Hello(this),
+            new Greetings(this),
+            new Bonjour(this)
         };
     }
 
@@ -64,7 +75,8 @@ public class MyLib
 }
 ```
 
-In this example, `FunUno`, `FunDos` and `FunTres` are three functions.
+In this example, `Hello`, `Greetings` and `Bonjour` are three
+functions.
 
 ## Functions
 
@@ -90,10 +102,10 @@ import org.expath.tools.saxon.fun.Definition;
 import org.expath.tools.saxon.fun.Function;
 import org.expath.tools.saxon.fun.Library;
 
-public class FunUno
+public class Hello
         extends Function
 {
-    public FunUno(Library lib)
+    public Hello(Library lib)
     {
         super(lib);
     }
@@ -112,7 +124,7 @@ public class FunUno
         // implement the behaviour, see below
     }
 
-    private static final String NAME = "fun-uno";
+    private static final String NAME = "hello";
 }
 ```
 
