@@ -16,8 +16,8 @@ in the library.
 
 The goal of an extension function is simply to implement an XPath
 function.  For instance, in XSLT, you could use the following
-function, provided that a function `hello`, in the same namespace,
-with 1 parameter, has been declared in Saxon:
+function, provided that an extension function `hello`, in the same
+namespace, with 1 parameter, has been declared in Saxon:
 
 ```xsl
 <xsl:sequence
@@ -228,16 +228,61 @@ values, and returning values.
 
 ## Register a library
 
-TODO: ...
+Once you have the classes for a library and its functions, you still
+need to register them against a Saxon processor.  The way to do it
+depends on how you use Saxon.  The situation is different if you
+invoke Saxon in your application, from Java code, or from the command
+line.  And if from the command line, it depends whether you use an
+EXPath package repository, or your own script for vanilla Saxon main
+classes.
 
 ### From Java
 
-TODO: ...
+The easiest situation is when you already invoke Saxon from Java.
+Then you just instantiate your library object, and call its method
+`register()`.  The following code snippet shows how to do it when you
+have a `Processor` object, using Saxon's S9API:
+
+```java
+Processor     proc = ...;
+Configuration conf = proc.getUnderlyingConfiguration();
+Library       lib  = new MyLib();
+lib.register(conf);
+```
 
 ### As an EXPath package
 
-TODO: ...
+If you package your extension library as en EXPath package (that is,
+as a XAR file), you can install it using `xrepo` from the command
+line:
+
+```shell
+> xrepo install my-lib.xar
+```
+
+Then you simply invoke Saxon using the `saxon` script from the
+repository distribution.  It takes care of configuring Saxon for you,
+accordingly to the content of the repository:
+
+```shell
+> saxon -xsl:test.xsl -s:test.xml
+```
 
 ### Using an Initializer
 
-TODO: ...
+If you want to invoke Saxon from the command line without using EXPath
+Packaging, you can use a Saxon `Initializer`.  The concept is: you
+write a class that implements the interface `Initializer`.  When you
+invoke Saxon, make sure that class, as well as your library and
+function classes are in the classpath.  And provide the initializer
+class name on the command line:
+
+```shell
+> java -cp ../saxon9he.jar:../my-lib.jar:../my-init.jar \
+      net.sf.saxon.Transform \
+      -init:org.example.my.MyInitializer \
+      -xsl:test.xsl -s:test.xml
+```
+
+Basically, the implementation of the initializer must follow the rules
+for the library registration from Java code, described above.
