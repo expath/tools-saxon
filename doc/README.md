@@ -25,6 +25,14 @@ namespace, with 1 parameter, has been declared in Saxon:
    select="my:hello('world')"/>
 ```
 
+## Contents
+
+- [Library](#library)
+- [Functions](#functions)
+- [Definition](#definition)
+- [The function implementation](#the-function-implementation)
+- [Register a library](#register-a-library)
+
 ## Library
 
 The package introduces the concept of `Library`.  A library is a
