@@ -173,7 +173,12 @@ protected Definition makeDefinition()
 This example defines two functions, both with the same name.  They
 both returns exactly one `xs:string`.  One takes one parameter called
 `first`, a string.  The second function takes 2 parameters: `first` as
-well, and `last`, also a string.
+well, and `last`, also a string.  In pseudo-notation:
+
+```xquery
+my:hello($first as xs:string) as xs:string
+my:hello($first as xs:string, $last as xs:string) as xs:string
+```
 
 ## The function implementation
 
