@@ -204,7 +204,8 @@ function:
 
 Typically, the beginning of `call()` will use `Parameters`, and the
 end will use `Return`.  The stuff in between is your business logic.
-The useful code you created an extension function for.
+The useful code you created an extension function for.  Parameters
+objects are returned by the method `checkParams()`.
 
 ```java
 @Override
@@ -214,15 +215,11 @@ public Sequence call(XPathContext ctxt, Sequence[] originalParams)
     // the params
     Parameters params = checkParams(originalParams);
     String first = params.asString(0, false);
+    String last  = params.asString(1, true);
     // the actual code
-    String result;
-    if ( params.number() = 1 ) {
-        result = "Hello, " + first + "!";
-    }
-    else {
-        String last = params.asString(1, true);
-        result = "Hello, " + first + " " + last + "!";
-    }
+    String result = last == null
+            ? "Hello, " + first + "!"
+            : "Hello, " + first + " " + last + "!";
     // return an xs:string
     return Return.value(result);
 }
