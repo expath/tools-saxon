@@ -40,8 +40,8 @@ collection of extension function, all in the same namespace (as well
 as a set of error codes they can raise, all in the same namespace).
 You can then register a library against the Saxon `Configuration`
 object (if you use Saxon from the command line, instead of using it
-from Java or .Net, see the section **Register a library** below for
-alternatives).
+from Java or .Net, see the section **[Register a
+library](#register-a-library)** below for alternatives).
 
 A library provides 3 properties:
 
