@@ -187,7 +187,7 @@ public class SaxonSequence
             throws ToolsException
     {
         if ( value != null ) {
-            if ( value.getNamespaceURI() != null ) {
+            if ( value.getNamespaceURI() != null && ! value.getNamespaceURI().equals("") ) {
                 throw new ToolsException(
                         "A QName with a non-null namespace not supported as a serialization param: {"
                                 + value.getNamespaceURI() + "}" + value.getLocalPart());
@@ -202,7 +202,7 @@ public class SaxonSequence
         if ( value != null ) {
             StringBuilder buf = new StringBuilder();
             for ( QName qname : value ) {
-                if ( qname.getNamespaceURI() != null ) {
+                if ( qname.getNamespaceURI() != null && ! qname.getNamespaceURI().equals("") ) {
                     throw new ToolsException(
                             "A QName with a non-null namespace not supported as a serialization param: {"
                                     + qname.getNamespaceURI() + "}" + qname.getLocalPart());
