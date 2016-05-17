@@ -19,7 +19,6 @@ import org.expath.tools.ToolsException;
  * The definition of an extension function for Saxon.
  *
  * @author Florent Georges
- * @date   2015-01-13
  */
 public class Definition
         extends ExtensionFunctionDefinition

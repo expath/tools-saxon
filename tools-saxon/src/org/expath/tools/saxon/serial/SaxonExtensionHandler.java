@@ -18,7 +18,6 @@ import org.expath.tools.serial.ExtensionHandler;
  * Handler for extension serialization parameters.
  * 
  * @author Florent Georges
- * @date   2015-01-08
  */
 public class SaxonExtensionHandler
         implements ExtensionHandler

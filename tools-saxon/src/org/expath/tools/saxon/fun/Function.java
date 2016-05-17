@@ -19,7 +19,6 @@ import org.expath.tools.ToolsException;
  * An extension function for Saxon.
  *
  * @author Florent Georges
- * @date   2015-01-13
  */
 public abstract class Function
         extends ExtensionFunctionCall

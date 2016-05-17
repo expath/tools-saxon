@@ -40,7 +40,6 @@ import net.sf.saxon.value.StringValue;
  * returns {@code empty()}).
  *
  * @author Florent Georges
- * @date   2013-12-22
  */
 public class Return
 {

@@ -20,7 +20,6 @@ import org.expath.tools.ToolsException;
  * The definition of a parameter of an extension function for Saxon.
  *
  * @author Florent Georges
- * @date   2015-01-13
  */
 public class DefBuilder
 {

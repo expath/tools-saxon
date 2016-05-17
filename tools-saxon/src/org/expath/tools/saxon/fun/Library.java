@@ -22,7 +22,6 @@ import org.expath.tools.ToolsException;
  * A library of extension functions for Saxon.
  *
  * @author Florent Georges
- * @date   2015-01-13
  */
 public abstract class Library
 {

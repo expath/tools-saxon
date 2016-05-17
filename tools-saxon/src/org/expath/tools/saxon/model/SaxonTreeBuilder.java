@@ -23,7 +23,6 @@ import org.expath.tools.model.TreeBuilder;
  * Implementation of {@link TreeBuilder} for Saxon.
  *
  * @author Florent Georges
- * @date   2009-02-02
  */
 public class SaxonTreeBuilder
         implements TreeBuilder

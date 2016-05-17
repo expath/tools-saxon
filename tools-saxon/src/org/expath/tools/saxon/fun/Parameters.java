@@ -31,7 +31,6 @@ import org.expath.tools.saxon.model.SaxonSequence;
  * Utilities for extension functions parameters for Saxon.
  *
  * @author Florent Georges
- * @date   2013-08-22
  */
 public class Parameters
 {

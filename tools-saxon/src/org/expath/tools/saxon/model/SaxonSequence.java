@@ -29,7 +29,6 @@ import org.expath.tools.serial.SerialParameters;
  * Saxon implementation of {@link Sequence}, relying on {@link SequenceIterator}.
  *
  * @author Florent Georges
- * @date   2011-03-10
  */
 public class SaxonSequence
         implements Sequence

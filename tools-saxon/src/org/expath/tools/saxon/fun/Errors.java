@@ -25,7 +25,6 @@ import net.sf.saxon.trans.XPathException;
  * and avoid having codes as strings all over the place.
  *
  * @author Florent Georges
- * @date   2013-09-16
  */
 public class Errors
 {

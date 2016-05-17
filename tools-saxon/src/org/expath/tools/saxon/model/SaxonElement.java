@@ -36,7 +36,6 @@ import org.expath.tools.model.Sequence;
  * Saxon implementation of {@link Element}, relying on {@link NodeInfo}.
  *
  * @author Florent Georges
- * @date   2011-03-10
  */
 public class SaxonElement
         implements Element

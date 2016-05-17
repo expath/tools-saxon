@@ -22,7 +22,6 @@ import org.expath.tools.model.Attribute;
  * Implementation of {@link Attribute} for Saxon.
  *
  * @author Florent Georges
- * @date   2011-03-10
  */
 public class SaxonAttribute
         implements Attribute
