@@ -103,9 +103,12 @@ public class SaxonSequence
         setOutputKey(props, SaxonOutputKeys.INCLUDE_CONTENT_TYPE,  params.getIncludeContentType());
         setOutputKey(props, SaxonOutputKeys.NORMALIZATION_FORM,    params.getNormalizationForm());
         setOutputKey(props, SaxonOutputKeys.UNDECLARE_PREFIXES,    params.getUndeclarePrefixes());
-        if ( params.getUseCharacterMaps() != null ) {
-            // TODO: How are we supposed to pass this param through a string property?
-            throw new ToolsException("Use character map serialization parameter is not supported");
+        Iterable<SerialParameters.UseChar> maps = params.getUseCharacterMaps();
+        if ( maps != null ) {
+            if ( maps.iterator().hasNext() ) {
+                // TODO: How are we supposed to pass this param through a string property?
+                throw new ToolsException("Use character map serialization parameter is not supported");
+            }
         }
 
         setExtensionKey(props, params, SaxonOutputKeys.CHARACTER_REPRESENTATION);
