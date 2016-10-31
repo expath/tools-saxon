@@ -32,7 +32,7 @@ public abstract class Library
     {
         myNs = ns;
         myPrefix = prefix;
-        myDefs = new HashMap<>();
+        myDefs = new HashMap<StructuredQName, Definition>();
         myErrors = new Errors(this);
     }
 

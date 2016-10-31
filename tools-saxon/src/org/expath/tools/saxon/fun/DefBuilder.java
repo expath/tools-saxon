@@ -28,7 +28,7 @@ public class DefBuilder
         myCall = call;
         myName = name;
         myOptional = false;
-        myParams = new ArrayList<>();
+        myParams = new ArrayList<Param>();
         myLib = lib;
     }
 

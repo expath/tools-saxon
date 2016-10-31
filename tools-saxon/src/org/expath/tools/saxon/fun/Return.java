@@ -138,7 +138,7 @@ public class Return
         if ( strings == null ) {
             return empty();
         }
-        List<AtomicValue> items = new ArrayList<>();
+        List<AtomicValue> items = new ArrayList<AtomicValue>();
         for ( String s : strings ) {
             StringValue v = new StringValue(s);
             items.add(v);

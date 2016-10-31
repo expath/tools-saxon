@@ -166,7 +166,7 @@ public class Parameters
         if ( null == it ) {
             return null;
         }
-        List<String> result = new ArrayList<>();
+        List<String> result = new ArrayList<String>();
         Item item = it.next();
         while ( item != null ) {
             if ( ! ( item instanceof StringValue ) ) {
