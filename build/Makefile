@@ -1,4 +1,4 @@
-ver  := 0.2.0
+ver  := 0.3.0
 mod  := expath-tools-saxon
 root := $(mod)-$(ver)
 prj  := ../tools-saxon
