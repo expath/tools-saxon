@@ -17,6 +17,7 @@ import net.sf.saxon.type.BuiltInAtomicType;
 import net.sf.saxon.type.Untyped;
 import org.expath.tools.ToolsException;
 import org.expath.tools.model.TreeBuilder;
+import org.expath.tools.saxon.misc.VoidLocation;
 
 
 /**
@@ -57,7 +58,7 @@ public class SaxonTreeBuilder
     {
         NodeName name = new FingerprintedQName(myPrefix, myNs, localname);
         try {
-            myBuilder.startElement(name, Untyped.getInstance(), 0, 0);
+            myBuilder.startElement(name, Untyped.getInstance(), VoidLocation.instance(), 0);
         }
         catch ( XPathException ex ) {
             throw new ToolsException("Error starting element on the Saxon tree builder", ex);
@@ -71,7 +72,7 @@ public class SaxonTreeBuilder
         if ( value != null ) {
             NodeName name = new NoNamespaceName(localname);
             try {
-                myBuilder.attribute(name, BuiltInAtomicType.UNTYPED_ATOMIC, value, 0, 0);
+                myBuilder.attribute(name, BuiltInAtomicType.UNTYPED_ATOMIC, value, VoidLocation.instance(), 0);
             }
             catch ( XPathException ex ) {
                 throw new ToolsException("Error creating attribute on the Saxon tree builder", ex);
@@ -103,11 +104,11 @@ public class SaxonTreeBuilder
         }
     }
 
-    private Builder myBuilder;
+    private final Builder myBuilder;
     /** The namespace used for the elements. */
-    private String myNs;
+    private final String myNs;
     /** The prefix used for the elements. */
-    private String myPrefix;
+    private final String myPrefix;
 }
 
 
