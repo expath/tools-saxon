@@ -75,7 +75,7 @@ public class SaxonElement
     public String getAttribute(String local_name)
     {
         // get the attribute
-        NamePool pool = myNode.getNamePool();
+        NamePool pool = myNode.getConfiguration().getNamePool();
         NodeTest pred = new NameTest(Type.ATTRIBUTE, "", local_name, pool);
         AxisIterator attrs = myNode.iterateAxis(AxisInfo.ATTRIBUTE, pred);
         NodeInfo a = (NodeInfo) attrs.next();
@@ -98,7 +98,7 @@ public class SaxonElement
     @Override
     public boolean hasNoNsChild()
     {
-        NamePool pool = myNode.getNamePool();
+        NamePool pool = myNode.getConfiguration().getNamePool();
         NodeTest no_ns_pred = new NamespaceTest(pool, Type.ELEMENT, "");
         NodeInfo next = myNode.iterateAxis(AxisInfo.CHILD, no_ns_pred).next();
         return next != null;
@@ -161,7 +161,7 @@ public class SaxonElement
     @Override
     public Iterable<Element> children(String ns)
     {
-        NamePool pool = myNode.getNamePool();
+        NamePool pool = myNode.getConfiguration().getNamePool();
         NodeTest pred = new NamespaceTest(pool, Type.ELEMENT, ns);
         AxisIterator it = myNode.iterateAxis(AxisInfo.CHILD, pred);
         return new ElemIterable(it);
